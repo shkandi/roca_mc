@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userOverrides>
+    <override>
+        <path>C:\Users\supervisor\Desktop\Info_material\info_STM32\stm_lesson\ecran.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\Include\font_5x7.h</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\Include\include.h</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\Task\ta_compass.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\Task\ta_ecran.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\common_fn.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\ecran_fn.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\interface.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\main.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+    <override>
+        <path>C:\lesson\roca\master.c</path>
+        <encoding>UTF-8</encoding>
+    </override>
+</userOverrides>

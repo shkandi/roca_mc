@@ -1,0 +1,183 @@
+##IAR Ninja build file
+
+
+#Rules
+rule COMPILER_XCL
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\common\bin\XclFileGenerator.exe" $xclcommand -f "$rspfile_name"
+  description = IAR_NEW_TOOL+++COMPILER_XCL+++$out
+  rspfile = $rspfile_name
+  rspfile_content = $flags
+
+rule INDEXER
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\common\bin\SourceIndexer.exe" $flags
+  depfile = $out.dep
+  deps = gcc
+  description = IAR_NEW_TOOL+++INDEXER+++$out
+
+rule MAKEBROWSE
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\common\bin\makeBrowseData.exe" $flags
+  description = IAR_NEW_TOOL+++MAKEBROWSE+++$out
+
+rule PDBLINK
+  command = "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\common\bin\PbdLink.exe" $flags
+  description = IAR_NEW_TOOL+++PDBLINK+++$out
+
+
+
+#Build steps
+build C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\CMSIS\system_stm32f1xx.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\CMSIS_13545061835669826545.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\CMSIS\system_stm32f1xx.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\croutine.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\croutine.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\event_groups.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\event_groups.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\heap_3.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\heap_3.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\list.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\list.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\port.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\port.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\queue.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\queue.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\tasks.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\tasks.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\FreeRTOS\timers.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\FreeRTOS_1129108015262781380.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\FreeRTOS\timers.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\Function\fn_ecran.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\Function_2001575203525341444.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\Function\fn_ecran.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\Task\ta_compass.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\Task_2582146873539655353.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\Task\ta_compass.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\Task\ta_ecran.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\Task_2582146873539655353.dir --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\Task\ta_ecran.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\common.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\common.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\ --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\common.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\common.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\common.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\common.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\common.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\init.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\init.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\ --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\init.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\init.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\init.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\init.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\init.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\interface.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\interface.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\ --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\interface.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\interface.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\interface.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\interface.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\interface.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\main.xcl : COMPILER_XCL 
+    flags = C$:\lesson\roca\main.c -D NDEBUG -o C$:\lesson\roca\Release\Obj\ --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\inc\c\DLib_Config_Normal.h" -I C$:\lesson\roca\FreeRTOS\ -I C$:\lesson\roca\FreeRTOS\inc\ -I C$:\lesson\roca\Include\ -I C$:\lesson\roca\CMSIS\ -Oh --predef_macros C$:\lesson\roca\Release\BrowseInfo\main.tmp
+    rspfile_name = C$:\lesson\roca\Release\BrowseInfo\main.xcl.rsp
+    xclcommand = -source_file C$:\lesson\roca\main.c -xcl_file C$:\lesson\roca\Release\BrowseInfo\main.xcl -macro_file C$:\lesson\roca\Release\BrowseInfo\main.tmp -icc_path "C$:\Program$ Files\IAR$ Systems\Embedded$ Workbench$ 9.2\arm\bin\iccarm.exe"
+
+build C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.xcl | C$:\lesson\roca\CMSIS\system_stm32f1xx.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.pbi -f C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.xcl | C$:\lesson\roca\FreeRTOS\croutine.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.xcl | C$:\lesson\roca\FreeRTOS\event_groups.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.xcl | C$:\lesson\roca\FreeRTOS\heap_3.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.xcl | C$:\lesson\roca\FreeRTOS\list.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.xcl | C$:\lesson\roca\FreeRTOS\port.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.xcl | C$:\lesson\roca\FreeRTOS\queue.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.xcl | C$:\lesson\roca\FreeRTOS\tasks.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.xcl | C$:\lesson\roca\FreeRTOS\timers.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.pbi -f C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.xcl | C$:\lesson\roca\Function\fn_ecran.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.pbi -f C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.xcl | C$:\lesson\roca\Task\ta_compass.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.pbi -f C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.xcl | C$:\lesson\roca\Task\ta_ecran.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.pbi -f C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\common.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\common.xcl | C$:\lesson\roca\common.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\common.pbi -f C$:\lesson\roca\Release\BrowseInfo\common.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\init.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\init.xcl | C$:\lesson\roca\init.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\init.pbi -f C$:\lesson\roca\Release\BrowseInfo\init.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\interface.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\interface.xcl | C$:\lesson\roca\interface.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\interface.pbi -f C$:\lesson\roca\Release\BrowseInfo\interface.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\main.pbi : INDEXER C$:\lesson\roca\Release\BrowseInfo\main.xcl | C$:\lesson\roca\main.c
+    flags = -out=C$:\lesson\roca\Release\BrowseInfo\main.pbi -f C$:\lesson\roca\Release\BrowseInfo\main.xcl
+
+build C$:\lesson\roca\Release\BrowseInfo\roca.pbw : MAKEBROWSE C$:\lesson\roca\Release\BrowseInfo\roca.pbd
+    flags = C$:\lesson\roca\Release\BrowseInfo\roca.pbd -output C$:\lesson\roca\Release\BrowseInfo\roca.pbw
+
+build C$:\lesson\roca\Release\BrowseInfo\roca_part0.pbi : PDBLINK C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.pbi | C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.pbi
+    flags = -M C$:\lesson\roca\Release\BrowseInfo\roca_part0.pbi C$:\lesson\roca\Release\BrowseInfo\CMSIS_13545061835669826545.dir\system_stm32f1xx.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\croutine.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\event_groups.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\heap_3.pbi
+
+build C$:\lesson\roca\Release\BrowseInfo\roca_part1.pbi : PDBLINK C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.pbi | C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.pbi
+    flags = -M C$:\lesson\roca\Release\BrowseInfo\roca_part1.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\list.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\port.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\queue.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\tasks.pbi
+
+build C$:\lesson\roca\Release\BrowseInfo\roca_part2.pbi : PDBLINK C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.pbi | C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.pbi
+    flags = -M C$:\lesson\roca\Release\BrowseInfo\roca_part2.pbi C$:\lesson\roca\Release\BrowseInfo\FreeRTOS_1129108015262781380.dir\timers.pbi C$:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.pbi C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_compass.pbi C$:\lesson\roca\Release\BrowseInfo\Task_2582146873539655353.dir\ta_ecran.pbi
+
+build C$:\lesson\roca\Release\BrowseInfo\roca_part3.pbi : PDBLINK C$:\lesson\roca\Release\BrowseInfo\common.pbi | C$:\lesson\roca\Release\BrowseInfo\init.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\interface.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\main.pbi
+    flags = -M C$:\lesson\roca\Release\BrowseInfo\roca_part3.pbi C$:\lesson\roca\Release\BrowseInfo\common.pbi C$:\lesson\roca\Release\BrowseInfo\init.pbi C$:\lesson\roca\Release\BrowseInfo\interface.pbi C$:\lesson\roca\Release\BrowseInfo\main.pbi
+
+build C$:\lesson\roca\Release\BrowseInfo\roca.pbd : PDBLINK C$:\lesson\roca\Release\BrowseInfo\roca_part0.pbi | C$:\lesson\roca\Release\BrowseInfo\roca_part1.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\roca_part2.pbi $
+ C$:\lesson\roca\Release\BrowseInfo\roca_part3.pbi
+    flags = -M C$:\lesson\roca\Release\BrowseInfo\roca.pbd C$:\lesson\roca\Release\BrowseInfo\roca_part0.pbi C$:\lesson\roca\Release\BrowseInfo\roca_part1.pbi C$:\lesson\roca\Release\BrowseInfo\roca_part2.pbi C$:\lesson\roca\Release\BrowseInfo\roca_part3.pbi
+
