@@ -1,23 +1,18 @@
 // Roca функции для экрана
 #include "stm32f1xx.h"
 #include "include.h"
+#include "static_data.h"
 #include "font_5x7.h"
-
-#define SPI2_A0_LOW	GPIOB->BSRR |= GPIO_BSRR_BR9 // задаем 0 на сигнале экрана А0
-#define SPI2_A0_HIGH	GPIOB->BSRR |= GPIO_BSRR_BS9 // задаем 1 на сигнале экрана А0
-#define SPI2_NSS_LOW    GPIOB->BSRR |= GPIO_BSRR_BR12 // задаем 0 на B12 (NSS)
-#define SPI2_NSS_HIGH   GPIOB->BSRR |= GPIO_BSRR_BS12 // задаем 1 на B12 (NSS)
-
-#define CASET 0x2A
-#define RASET 0x2B
-#define RAMWR 0x2C
-
-
 
 extern int sinus_ang[91];
 u16 ecr_arr[16][21]; // Массив координат символов экрана (при разбивке 21х16)
-
+u8 el_buf[21];
+char arc_draw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs, u16 color);
 char radius_point(u16 osx, u16 osy, u8 radius, s16 ang, u16 *crdx, u16 *crdy);
+char point_draw(u16 col, u16 coh, u16 color);
+void ecran_com(u8 com);
+void ecran_dat(u8 dat);
+
 
 // Отправка команды по SPI на экран. Аргумент - команда типа 0x00
 void ecran_com(u8 com){
@@ -62,7 +57,7 @@ void init_ecran(void){
       tmp <<= 8;
       tmp &= 0xff00;
       tmp |= y_pos;
-      ecr_arr[i][j] = tmp;
+      ecr_arr[j][i] = tmp;
       x_pos += 0x06;
     }
     x_pos = 0x03;
@@ -177,8 +172,24 @@ void draw_black(u16 pos){ // pos - позиция символа, задаетс
 
 
 
+// Отрисовка точки
+char point_draw(u16 col, u16 coh, u16 color){
+  ecran_com(CASET); //комманда на х координаты клетки
+  ecran_dat(col >> 8);
+  ecran_dat(col);
+  ecran_com(RASET); //комманда на y координаты клетки
+  ecran_dat(coh >> 8);
+  ecran_dat(coh);
+  ecran_com(RAMWR); // комманда на отправку цвета  
+  ecran_dat(color >> 8);
+  ecran_dat(color);
+  return 0;
+}
+
+
+
 // Отрисовка дуги окружности
-char arc_draw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs, u8 color){
+char arc_draw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs, u16 color){
 
   u16 ang_rl;
   u16 ang_cn;
@@ -246,7 +257,7 @@ char arc_draw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs, u8 color)
     ecran_dat(0x00);
     ecran_dat(cord_h);
     ecran_com(RAMWR); // комманда на отправку цвета  
-    ecran_dat(color);
+    ecran_dat(color >> 8);
     ecran_dat(color);
             
     if (ang_rl >= 359)
@@ -260,8 +271,8 @@ char arc_draw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs, u8 color)
 
 
 // Отрисовка радиуса
-char radius_drw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs){
-
+char radius_drw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 color){
+  
   u16 ang_cn;
   u32 hilf_l;
   u32 hilf_h;
@@ -273,18 +284,19 @@ char radius_drw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs){
 
   if (ang > 360) 
     return 1;
-
+  
   hilf_r = 0;
   for (i = 0; i < radius; i++){
 
     cord_l = zero_x;
     cord_h = zero_y;
-
+    
     if (ang == 0 || ang == 90 || ang == 180 || ang == 270 || ang == 360)
       ang_cn = 0;
     else
       ang_cn = ang % 90;
-
+    
+    
     hilf_h = (hilf_r * sinus_ang[ang_cn]) / 10000;
     hilf_l = (hilf_r * sinus_ang[90 - ang_cn]) / 10000;
 
@@ -318,8 +330,8 @@ char radius_drw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs){
     ecran_dat(0x00);
     ecran_dat(cord_h);
     ecran_com(RAMWR); // комманда на отправку цвета  
-    ecran_dat(0xff);
-    ecran_dat(0xff);
+    ecran_dat(color >> 8);
+    ecran_dat(color);
    
     hilf_r++;
   }
@@ -386,58 +398,158 @@ char radius_point(u16 osx, u16 osy, u8 radius, s16 ang, u16 *crdx, u16 *crdy){
     default:
       break;
   }
-  return 0;
+ 
+  
 }
 
 
 
 // Рисуем стрелку
-char arrow_drw(u16 pox, u16 poy, u16 ang){
+char arrow_drw(u16 pox, u16 poy, u16 *n_ang, u16 *p_ang){
 	
-	u8 i; 
+        u16 mov_ang;
+        u16 n_posi;
+        u16 s_posi;
+        u16 delta;
+        u8 ccv_flag;
+        u16 ar_npos[4]; 
+        u16 ar_spos[4]; 
+        u16 i, t; 
 	u16 cord_l;
 	u16 cord_h;
-	u16 hox;
-	u16 hoy;
 	
-	// Затирка CV
-	radius_point(pox, poy, 2, ang + 135, &hox, &hoy);
-	for (i = 2; i < 28; i++){
-		radius_point(hox, hoy, i, ang, &cord_l, &cord_h);
-		//ecran[cord_h][cord_l] = 88;
-	}
-	radius_point(pox, poy, 2, ang - 45, &hox, &hoy);
-	for (i = 2; i < 28; i++){
-		radius_point(hox, hoy, i, ang + 180, &cord_l, &cord_h);
-		//ecran[cord_h][cord_l] = 88;
-	}
-	
-	/*
-	// Затирка CCV
-	radius_point(pox, poy, 2, ang - 135, &hox, &hoy);
-	for (i = 2; i < 28; i++){
-		radius_point(hox, hoy, i, ang, &cord_l, &cord_h);
-		ecran[cord_h][cord_l] = 88;
-	}
-	radius_point(pox, poy, 2, ang + 45, &hox, &hoy);
-	for (i = 2; i < 28; i++){
-		radius_point(hox, hoy, i, ang + 180, &cord_l, &cord_h);
-		ecran[cord_h][cord_l] = 88;
-	}
-	*/
+        // Если нет разницы с предыдущим углом, выходим
+        if (*n_ang == *p_ang)
+          return 0;
+       
+        // Определяем сторону вращения и дельту с новым углом
+        if (*n_ang > *p_ang){
+          delta = *n_ang - *p_ang;
+          if (delta < 180)
+            ccv_flag = 1;
+          else {
+            ccv_flag = 0;
+            delta = 360 - delta;
+            }
+        } 
+        else {
+          delta = *p_ang - *n_ang;
+            if (delta < 180)
+              ccv_flag = 0;
+            else {
+              ccv_flag = 1;
+              delta = 360 - delta;
+            }
+          }
 
+        mov_ang = *p_ang;
 
+      while(delta){
+        delta--;
+        // Если поворот против часовой стрелки (CVV)
+        if (ccv_flag){
+            
+            mov_ang++;
+            if (mov_ang == 360)
+              mov_ang = 0;
+            
+            // Берем N позицию и откатываем назад
+            n_posi = mov_ang;
+            for (i = 0; i < 2; i++){
+              if (n_posi == 0)
+                n_posi = 359;
+              else
+                n_posi--;
+            }
+            
+            // Берем S позицию
+            s_posi = mov_ang + 178;
+            if (s_posi > 360)
+              s_posi = s_posi - 360;
+
+            // Записываем углы для N и S в массив
+            for (i = 0; i < 4; i++){
+              ar_npos[i] = n_posi;
+              ar_spos[i] = s_posi;
+              n_posi++;
+              s_posi++;
+              if (n_posi == 360)
+                n_posi = 0;
+              if (s_posi == 360)
+                s_posi = 0;
+            }
+
+            // Отрисовываем N и S
+            for (t = 0; t < 4; t ++){
+              for (i = 23; i < 30; i++){
+                radius_point(pox, poy, i, ar_npos[t], &cord_l, &cord_h);
+                point_draw(cord_l, cord_h, ar_nclr[t]);
+              }
+              for (i = 23; i < 30; i++){
+                radius_point(pox, poy, i, ar_spos[t], &cord_l, &cord_h);
+                point_draw(cord_l, cord_h, ar_sclr[t]);
+              }
+            }
+          }
+        
+         // Если поворот по часовой стрелки (CV)
+         else {   
+            
+           if (mov_ang == 0)
+            mov_ang = 359; 
+           else
+            mov_ang--;
+            
+            // Берем N позицию и двигаем вперед
+            n_posi = mov_ang;
+            for (i = 0; i < 2; i++){
+              n_posi++;
+              if (n_posi == 360)
+                n_posi = 0;
+            }
+            
+            // Берем S позицию
+            s_posi = mov_ang + 182;
+            if (s_posi > 360)
+              s_posi = s_posi - 360;
+
+            // Записываем углы для N и S в массив
+            for (i = 0; i < 4; i++){
+              ar_npos[i] = n_posi;
+              ar_spos[i] = s_posi;
+              
+              if (n_posi == 0)
+                n_posi = 359;
+              else
+                n_posi--;
+                  
+              if (s_posi == 0)
+                s_posi = 359;
+              else
+                s_posi--;
+              
+            }
+
+            // Отрисовываем N и S
+            for (t = 0; t < 4; t ++){
+              for (i = 23; i < 30; i++){
+                radius_point(pox, poy, i, ar_npos[t], &cord_l, &cord_h);
+                point_draw(cord_l, cord_h, ar_nclr[t]);
+              }
+              for (i = 23; i < 30; i++){
+                radius_point(pox, poy, i, ar_spos[t], &cord_l, &cord_h);
+                point_draw(cord_l, cord_h, ar_sclr[t]);
+              }
+            }
+          
+         }
+       }
+                  
+        
+           
+	*p_ang = *n_ang;
 	
-        // Стрелка
-	for (i = 2; i < 27; i++){
-		radius_point(pox, poy, i, ang, &cord_l, &cord_h);
-		//ecran[cord_h][cord_l] = 78;
-	}
-	for (i = 2; i < 27; i++){
-		radius_point(pox, poy, i, ang + 180, &cord_l, &cord_h);
-		//ecran[cord_h][cord_l] = 83;
-	}
-	
+      	
 	return 0;
 
 }

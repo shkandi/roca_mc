@@ -1742,15 +1742,15 @@
                 <option>
                     <name>OOCOutputFormat</name>
                     <version>3</version>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OCOutputOverride</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>roca.srec</state>
+                    <state>roca.hex</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -1758,7 +1758,7 @@
                 </option>
                 <option>
                     <name>OOCObjCopyEnable</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
             </data>
         </settings>
@@ -1768,7 +1768,7 @@
             <data>
                 <extensions></extensions>
                 <cmdline></cmdline>
-                <hasPrio>0</hasPrio>
+                <hasPrio>1</hasPrio>
                 <buildSequence>inputOutputBased</buildSequence>
             </data>
         </settings>
@@ -2474,6 +2474,12 @@
     <group>
         <name>Function</name>
         <file>
+            <name>$PROJ_DIR$\Function\fn_compa.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Function\fn_contact.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Function\fn_ecran.c</name>
         </file>
     </group>
@@ -2495,7 +2501,10 @@
     <group>
         <name>Task</name>
         <file>
-            <name>$PROJ_DIR$\Task\ta_compass.c</name>
+            <name>$PROJ_DIR$\Task\ta_compa.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Task\ta_contact.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Task\ta_ecran.c</name>

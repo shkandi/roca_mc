@@ -2983,6 +2983,12 @@
     <group>
         <name>Function</name>
         <file>
+            <name>$PROJ_DIR$\Function\fn_compa.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Function\fn_contact.c</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\Function\fn_ecran.c</name>
         </file>
     </group>
@@ -3004,7 +3010,10 @@
     <group>
         <name>Task</name>
         <file>
-            <name>$PROJ_DIR$\Task\ta_compass.c</name>
+            <name>$PROJ_DIR$\Task\ta_compa.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Task\ta_contact.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\Task\ta_ecran.c</name>

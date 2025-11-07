@@ -1,0 +1,73 @@
+[33mcommit fefda44489b67c1f819be3fb9525130d4081692a[m
+Author: Bor_A <Администратор@.(none)>
+Date:   Wed Oct 22 12:02:15 2025 +0300
+
+    roca commit 01
+
+[1mdiff --git a/CMSIS/core_cm3.h b/CMSIS/core_cm3.h[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b4ac4c7[m
+[1m--- /dev/null[m
+[1m+++ b/CMSIS/core_cm3.h[m
+[36m@@ -0,0 +1,1763 @@[m
+[32m+[m[32m/**************************************************************************//**[m
+[32m+[m[32m * @file     core_cm3.h[m
+[32m+[m[32m * @brief    CMSIS Cortex-M3 Core Peripheral Access Layer Header File[m
+[32m+[m[32m * @version  V4.30[m
+[32m+[m[32m * @date     20. October 2015[m
+[32m+[m[32m ******************************************************************************/[m
+[32m+[m[32m/* Copyright (c) 2009 - 2015 ARM LIMITED[m
+[32m+[m
+[32m+[m[32m   All rights reserved.[m
+[32m+[m[32m   Redistribution and use in source and binary forms, with or without[m
+[32m+[m[32m   modification, are permitted provided that the following conditions are met:[m
+[32m+[m[32m   - Redistributions of source code must retain the above copyright[m
+[32m+[m[32m     notice, this list of conditions and the following disclaimer.[m
+[32m+[m[32m   - Redistributions in binary form must reproduce the above copyright[m
+[32m+[m[32m     notice, this list of conditions and the following disclaimer in the[m
+[32m+[m[32m     documentation and/or other materials provided with the distribution.[m
+[32m+[m[32m   - Neither the name of ARM nor the names of its contributors may be used[m
+[32m+[m[32m     to endorse or promote products derived from this software without[m
+[32m+[m[32m     specific prior written permission.[m
+[32m+[m[32m   *[m
+[32m+[m[32m   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"[m
+[32m+[m[32m   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE[m
+[32m+[m[32m   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE[m
+[32m+[m[32m   ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE[m
+[32m+[m[32m   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR[m
+[32m+[m[32m   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF[m
+[32m+[m[32m   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS[m
+[32m+[m[32m   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN[m
+[32m+[m[32m   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)[m
+[32m+[m[32m   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE[m
+[32m+[m[32m   POSSIBILITY OF SUCH DAMAGE.[m
+[32m+[m[32m   ---------------------------------------------------------------------------*/[m
+[32m+[m
+[32m+[m
+[32m+[m[32m#if   defined ( __ICCARM__ )[m
+[32m+[m[32m #pragma system_include         /* treat file as system include file for MISRA check */[m
+[32m+[m[32m#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)[m
+[32m+[m[32m  #pragma clang system_header   /* treat file as system include file */[m
+[32m+[m[32m#endif[m
+[32m+[m
+[32m+[m[32m#ifndef __CORE_CM3_H_GENERIC[m
+[32m+[m[32m#define __CORE_CM3_H_GENERIC[m
+[32m+[m
+[32m+[m[32m#include <stdint.h>[m
+[32m+[m
+[32m+[m[32m#ifdef __cplusplus[m
+[32m+[m[32m extern "C" {[m
+[32m+[m[32m#endif[m
+[32m+[m
+[32m+[m[32m/**[m
+[32m+[m[32m  \page CMSIS_MISRA_Exceptions  MISRA-C:2004 Compliance Exceptions[m
+[32m+[m[32m  CMSIS violates the following MISRA-C:2004 rules:[m
+[32m+[m
+[32m+[m[32m   \li Required Rule 8.5, object/function definition in header file.<br>[m
+[32m+[m[32m     Function definitions in header files are used to allow 'inlining'.[m
+[32m+[m
+[32m+[m[32m   \li Required Rule 18.4, declaration of union type or object of union type: '{...}'.<br>[m
+[32m+[m[32m     Unions are used for effective representation of core registers.[m
+[32m+[m
+[32m+[m[32m   \li Advisory Rule 19.7, Function-like macro defined.<br>[m
+[32m+

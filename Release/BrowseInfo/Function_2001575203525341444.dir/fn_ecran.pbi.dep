@@ -12,4 +12,5 @@ C:\lesson\roca\Release\BrowseInfo\Function_2001575203525341444.dir\fn_ecran.pbi:
   C:\Program\ Files\IAR\ Systems\Embedded\ Workbench\ 9.2\arm\inc\c\aarch32\iccarm_builtin.h \
   C:\lesson\roca\CMSIS\core_cmFunc.h \
   C:\lesson\roca\CMSIS\system_stm32f1xx.h \
+  C:\lesson\roca\Include\include.h C:\lesson\roca\Include\static_data.h \
   C:\lesson\roca\Include\include.h C:\lesson\roca\Include\font_5x7.h
