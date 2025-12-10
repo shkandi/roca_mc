@@ -11,6 +11,7 @@ void ta_contact(void *pvParameters);
 void ta_ecran(void *pvParameters);
 void ta_compa(void *pvParameters);
 
+
 int main(void){
   
   roca_init(); // Инициализация МК
@@ -20,11 +21,10 @@ int main(void){
   xTaskCreate(ta_contact,"contact", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
   xTaskCreate(ta_ecran,"ecran", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
   xTaskCreate(ta_compa,"compass", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL);
-  
+    
   // Запускаем планировщик
   vTaskStartScheduler();
-    
+  
   return 0;
-    
 }
 

@@ -1,10 +1,25 @@
 // Roca функции для экрана
 #include "stm32f1xx.h"
 #include "include.h"
-#include "static_data.h"
+//#include "static_data.h"
 #include "font_5x7.h"
 
-extern int sinus_ang[91];
+// Таблица значений синуса
+const u16 sinus_ang[91] = {
+  0, 174, 348, 523, 697, 871, 1045, 1218, 1391, 1564, 1736,
+  1908, 2079, 2249, 2419, 2588, 2756, 2923, 3090, 3255, 3420,
+  3583, 3746, 3907, 4067, 4226, 4383, 4539, 4694, 4848, 5000,
+  5150, 5299, 5446, 5591, 5735, 5877, 6018, 6156, 6293, 6427,
+  6560, 6691, 6819, 6946, 7071, 7193, 7313, 7431, 7547, 7660,
+  7771, 7880, 7986, 8090, 8191, 8290, 8386, 8480, 8571, 8660,
+  8746, 8829, 8910, 8987, 9063, 9135, 9205, 9271, 9335, 9396,
+  9455, 9510, 9563, 9612, 9659, 9702, 9743, 9781, 9816, 9848,
+  9876, 9902, 9925, 9945, 9961, 9975, 9986, 9993, 9998, 10000
+};
+
+const u16 ar_nclr[] = {SRC_BACK_COLOR, SRC_N_ARROW_COLOR, SRC_N_ARROW_COLOR, SRC_N_ARROW_COLOR};
+const u16 ar_sclr[] = {SRC_BACK_COLOR, SRC_S_ARROW_COLOR, SRC_S_ARROW_COLOR, SRC_S_ARROW_COLOR};
+
 u16 ecr_arr[16][21]; // Массив координат символов экрана (при разбивке 21х16)
 u8 el_buf[21];
 char arc_draw(u16 zero_x, u16 zero_y, u8 radius, u16 ang, u16 ang_ofs, u16 color);
@@ -75,6 +90,8 @@ void init_ecran(void){
   delay(1000);
   //ecran_com(0xB1);// частота обновления дисплея
   //ecran_dat(0x00);// данные
+  ecran_com(0x36); // Ориентирование экрана
+  ecran_dat(0x00);
   delay(1000);
   ecran_com(0x29);// включение дисплея
 }
@@ -418,9 +435,17 @@ char arrow_drw(u16 pox, u16 poy, u16 *n_ang, u16 *p_ang){
 	u16 cord_l;
 	u16 cord_h;
 	
+        if (*n_ang > 360){
+          *p_ang = 15;
+          *n_ang = 15;
+          return 0;
+        }
+
+
         // Если нет разницы с предыдущим углом, выходим
         if (*n_ang == *p_ang)
           return 0;
+        
        
         // Определяем сторону вращения и дельту с новым углом
         if (*n_ang > *p_ang){
@@ -442,6 +467,7 @@ char arrow_drw(u16 pox, u16 poy, u16 *n_ang, u16 *p_ang){
             }
           }
 
+        
         mov_ang = *p_ang;
 
       while(delta){
@@ -481,7 +507,7 @@ char arrow_drw(u16 pox, u16 poy, u16 *n_ang, u16 *p_ang){
 
             // Отрисовываем N и S
             for (t = 0; t < 4; t ++){
-              for (i = 23; i < 30; i++){
+                for (i = 23; i < 30; i++){
                 radius_point(pox, poy, i, ar_npos[t], &cord_l, &cord_h);
                 point_draw(cord_l, cord_h, ar_nclr[t]);
               }
@@ -490,6 +516,7 @@ char arrow_drw(u16 pox, u16 poy, u16 *n_ang, u16 *p_ang){
                 point_draw(cord_l, cord_h, ar_sclr[t]);
               }
             }
+            
           }
         
          // Если поворот по часовой стрелки (CV)
@@ -544,12 +571,9 @@ char arrow_drw(u16 pox, u16 poy, u16 *n_ang, u16 *p_ang){
           
          }
        }
-                  
-        
-           
-	*p_ang = *n_ang;
-	
-      	
-	return 0;
+      
+      *p_ang = *n_ang;
+
+      return 0;
 
 }

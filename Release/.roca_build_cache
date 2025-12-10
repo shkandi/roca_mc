@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BuildDb>
     <Tool>
+        <Name>assembler</Name>
+        <Parent>
+            <Path>C:\lesson\roca\CMSIS\startup_stm32f103xb.s</Path>
+            <Output>
+                <Path>C:\lesson\roca\Release\List\CMSIS_13545061835669826545.dir\startup_stm32f103xb.lst</Path>
+            </Output>
+        </Parent>
+    </Tool>
+    <Tool>
         <Name>linker</Name>
         <Parent>
             <Path>C:\lesson\roca\Release\Exe\roca.out</Path>

@@ -3,11 +3,11 @@
 #define __INCLUDE
 
 typedef unsigned char u8;
-typedef unsigned short int u16;
+typedef unsigned short u16;
 typedef unsigned int u32;
 
 typedef signed char s8;
-typedef signed short int s16;
+typedef signed short s16;
 typedef signed int s32;
 
 // Общие дефайны
@@ -17,23 +17,24 @@ typedef signed int s32;
 #define FLAG_DOWN 0x00
 
 
-// Команды пакета UART
-#define UART_CODE_READ 0
-#define UART_CODE_WRITE 1
-#define UART_CODE_AND 2
-#define UART_CODE_OR 3
-#define UART_CODE_ANSWER 4
+// Пакет соединения UART
+#define FRAME_CODE_READ 0x00
+#define FRAME_CODE_WRITE 0x01
+#define FRAME_CODE_AND 0x02
+#define FRAME_CODE_OR 0x03
+#define FRAME_CODE_ANSWER 0xa0
+#define FRAME_CODE_ERROR 0xef
 
 
 // Настройки счетчиков
-#define CPU_FREQ_MHZ 1 // Частоста в МГц 
-#define CPU_FREQ_HZ CPU_FREQ_MHZ * 1000000 // Частоста в Гц 
-#define TIME_MS CPU_FREQ_MHZ * 1000 // Счетчик миллисекунды
+#define CPU_FREQ_MHZ 32 // Частоста в МГц 
+#define CPU_FREQ_HZ CPU_FREQ_MHZ * 32000000 // Частоста в Гц 
+#define TIME_MS 3210 // Счетчик для 1мс (эксперементально)
 #define TOUT_CLK_SETUP 4000 // Таймаут настроек тактирования
 
 
 // Настройки общие
-#define SET_ID_DATA 0xCA // Байт идентификации
+#define SET_ID_DATA 0xca // Байт идентификации
 #define SET_FW_VERSION 1 // Версия ПО
 #define SET_FW_SUB_VERSION 0 // Подверсия ПО
 #define SET_REG_SIZE 256 //  Количество рабочих регистров
@@ -41,7 +42,7 @@ typedef signed int s32;
 
 
 // Настройки логирования
-#define SET_LOG_SIZE 256 // Количество записей в логе
+#define SET_LOG_SIZE 64 // Количество записей в логе
 #define EVENT_STOP_MASK 0xe0 // Маска для событий остановки
 #define EVENT_RESTART_MASK 0xf0 // Маска для событий перезагрузки
 
@@ -66,10 +67,21 @@ typedef signed int s32;
 
 
 // Настройки интерфейса uart1
-#define SET_UART1_SBUF_SIZE 32 // Размер буфера передачи по uart1
-#define SET_UART1_RBUF_SIZE 32 // Размер буфера приема по uart1
-#define UART1_REC_WAIT TIME_MS * 10 // Ожидание приема uart1 10 мс
+#define SET_UART1_BAUD_RATE 417 // 19200
+#define SET_UART1_SBUF_SIZE 64 // Размер буфера передачи по uart1
+#define SET_UART1_RBUF_SIZE 64 // Размер буфера приема по uart1
+#define UART1_REC_WAIT TIME_MS * 10 // Ожидание приема uart1
 
+// Настройки интерфейса uart2
+#define SET_UART2_BAUD_RATE 417 // 19200
+#define SET_UART2_SBUF_SIZE 64 // Размер буфера передачи по uart2
+#define SET_UART2_RBUF_SIZE 64 // Размер буфера приема по uart2
+#define UART2_RECEIVE_WAIT 1000 // Счетчик ожидания приема uart2
+
+// Коды Modbus
+#define MODBUS_ADR_MCU 0xF1 // Адрес MCU
+#define MODBUS_ADR_PC 0xB1 // Адрес PC
+#define MODBUS_FUNCTION 0x00 // Modbus function
 
 //Журнал событий
 #define EVENT_IN 1 // Приходящее событие
@@ -89,6 +101,29 @@ extern u8 ar_reg[SET_REG_SIZE];
 extern u32 *p_ufdate; // Указатель на дату и время
 extern u8 *p_status; // Указатель на статус
 extern u16 *p_compa; // Указатель на угол компаса
+
+// Отладка
+extern u16 *p_a0;
+extern u16 *p_a1;
+extern u16 *p_a2;
+extern u16 *p_a3;
+extern u16 *p_a4;
+extern u16 *p_a5;
+
+extern u16 *p_b0;
+extern u16 *p_b1;
+extern u16 *p_b2;
+extern u16 *p_b3;
+extern u16 *p_b4;
+extern u16 *p_b5;
+
+extern u16 *p_c0;
+extern u16 *p_c1;
+extern u16 *p_c2;
+extern u16 *p_c3;
+extern u16 *p_c4;
+extern u16 *p_c5;
+
 
 void event_log(u8 inout, u8 event, u8 code, u32 data); // Логироване событий
 void delay(u32 count); // Функция задержки

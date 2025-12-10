@@ -1,0 +1,29 @@
+###############################################################################
+#                                                                             #
+#     IAR Assembler V9.40.1.364/W64 for ARM 13/Nov/2025  16:25:25             #
+#     Copyright 1999-2023 IAR Systems AB.                                     #
+#                                                                             #
+#           Source file   =  C:\lesson\roca\CMSIS\startup_stm32f103xb.s       #
+#           List file     =  C:\lesson\roca\Release\List\CMSIS_13545061835669826545.dir\startup_stm32f103xb.lst#
+#           Object file   =  C:\lesson\roca\Release\Obj\CMSIS_13545061835669826545.dir\startup_stm32f103xb.o#
+#           Command line  =  -f                                               #
+#                            C:\lesson\roca\Release\Obj\CMSIS_13545061835669826545.dir\startup_stm32f103xb.o.rsp #
+#                            (C:\lesson\roca\CMSIS\startup_stm32f103xb.s      #
+#                            -OC:\lesson\roca\Release\Obj\CMSIS_13545061835669826545.dir #
+#                            -s+ -M<> -w+                                     #
+#                            -LC:\lesson\roca\Release\List\CMSIS_13545061835669826545.dir #
+#                            -cD -t8 --cpu Cortex-M3 --fpu None) -y           #
+#                            C:\lesson\roca\Release\Obj\CMSIS_13545061835669826545.dir\startup_stm32f103xb.o.iar_deps #
+#                                                                             #
+###############################################################################
+
+##############################
+#           CRC:0            #
+#        Errors:   0         #
+#        Warnings: 0         #
+#         Bytes: 460         #
+##############################
+
+
+
+

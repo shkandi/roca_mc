@@ -33,13 +33,13 @@
 /* Hardware description related definitions. **********************************/
 /******************************************************************************/
 
-#define configCPU_CLOCK_HZ                         1000000
+#define configCPU_CLOCK_HZ                         32000000
 
 /******************************************************************************/
 /* Scheduling behaviour related definitions. **********************************/
 /******************************************************************************/
 
-#define configTICK_RATE_HZ                         1000
+#define configTICK_RATE_HZ                         200
 #define configUSE_PREEMPTION                       1
 #define configUSE_TIME_SLICING                     1
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION    0
